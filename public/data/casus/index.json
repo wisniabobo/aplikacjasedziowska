@@ -1,0 +1,165 @@
+[
+ {
+  "id": "asap-2025",
+  "year": 2025,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2025",
+  "tasks": [
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa publicznego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2024",
+  "year": 2024,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2024",
+  "tasks": [
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa publicznego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2023",
+  "year": 2023,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2023",
+  "tasks": [
+   "Kazus z prawa publicznego",
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2022",
+  "year": 2022,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2022",
+  "tasks": [
+   "Kazus z prawa publicznego",
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2021",
+  "year": 2021,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2021",
+  "tasks": [
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa publicznego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2020",
+  "year": 2020,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2020",
+  "tasks": [
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa publicznego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2019",
+  "year": 2019,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2019",
+  "tasks": [
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa publicznego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2018",
+  "year": 2018,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2018",
+  "tasks": [
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa publicznego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "asap-2017",
+  "year": 2017,
+  "kind": "sedziowska-prokuratorska",
+  "label": "II etap – konkurs na aplikację sędziowską i prokuratorską 2017",
+  "tasks": [],
+  "hasCriteria": true
+ },
+ {
+  "id": "ao-2016",
+  "year": 2016,
+  "kind": "ogolna",
+  "label": "II etap – konkurs na aplikację ogólną 2016",
+  "tasks": [
+   "Kazus z prawa publicznego",
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "ao-2015",
+  "year": 2015,
+  "kind": "ogolna",
+  "label": "II etap – konkurs na aplikację ogólną 2015",
+  "tasks": [
+   "Kazus z prawa publicznego",
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "ao-2014",
+  "year": 2014,
+  "kind": "ogolna",
+  "label": "II etap – konkurs na aplikację ogólną 2014",
+  "tasks": [
+   "Kazus z prawa publicznego",
+   "Kazus z prawa prywatnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "ao-2013",
+  "year": 2013,
+  "kind": "ogolna",
+  "label": "II etap – konkurs na aplikację ogólną 2013",
+  "tasks": [
+   "Kazus z prawa publicznego",
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa karnego"
+  ],
+  "hasCriteria": true
+ },
+ {
+  "id": "ao-2010",
+  "year": 2010,
+  "kind": "ogolna",
+  "label": "II etap – konkurs na aplikację ogólną 2010",
+  "tasks": [
+   "Kazus z prawa karnego",
+   "Kazus z prawa prywatnego",
+   "Kazus z prawa publicznego"
+  ],
+  "hasCriteria": true
+ }
+]

@@ -1,0 +1,323 @@
+{
+ "generatedAt": "2026-10-25T13:50:27.183Z",
+ "total": 13200,
+ "perAct": {
+  "konstytucja": {
+   "total": 424,
+   "kinds": {
+    "organ": 189,
+    "tryb": 122,
+    "termin": 67,
+    "sankcja": 2,
+    "wiekszosc": 18,
+    "ulamek": 17,
+    "liczba": 8,
+    "sad": 1
+   }
+  },
+  "rpo": {
+   "total": 52,
+   "kinds": {
+    "organ": 19,
+    "tryb": 22,
+    "liczba": 1,
+    "termin": 8,
+    "wiekszosc": 1,
+    "ulamek": 1
+   }
+  },
+  "rpd": {
+   "total": 48,
+   "kinds": {
+    "tryb": 18,
+    "organ": 16,
+    "liczba": 4,
+    "termin": 10
+   }
+  },
+  "sn": {
+   "total": 377,
+   "kinds": {
+    "organ": 135,
+    "tryb": 114,
+    "termin": 65,
+    "liczba": 21,
+    "ulamek": 30,
+    "wiekszosc": 3,
+    "sankcja": 1,
+    "sad": 8
+   }
+  },
+  "usp": {
+   "total": 1275,
+   "kinds": {
+    "sad": 462,
+    "tryb": 336,
+    "organ": 199,
+    "termin": 220,
+    "ulamek": 53,
+    "wiekszosc": 3,
+    "kwota": 1,
+    "skutek": 1
+   }
+  },
+  "prok": {
+   "total": 470,
+   "kinds": {
+    "organ": 150,
+    "tryb": 174,
+    "sad": 13,
+    "liczba": 7,
+    "termin": 100,
+    "ulamek": 26
+   }
+  },
+  "kc": {
+   "total": 765,
+   "kinds": {
+    "tryb": 551,
+    "skutek": 59,
+    "termin": 139,
+    "organ": 12,
+    "ulamek": 4
+   }
+  },
+  "kpc": {
+   "total": 2034,
+   "kinds": {
+    "tryb": 1458,
+    "sad": 114,
+    "termin": 329,
+    "organ": 99,
+    "skutek": 23,
+    "sankcja": 2,
+    "ulamek": 9
+   }
+  },
+  "ukwh": {
+   "total": 104,
+   "kinds": {
+    "tryb": 72,
+    "termin": 8,
+    "sad": 7,
+    "organ": 15,
+    "skutek": 2
+   }
+  },
+  "uksc": {
+   "total": 207,
+   "kinds": {
+    "tryb": 66,
+    "organ": 4,
+    "kwota": 120,
+    "ulamek": 2,
+    "termin": 11,
+    "sankcja": 2,
+    "sad": 2
+   }
+  },
+  "kro": {
+   "total": 182,
+   "kinds": {
+    "tryb": 147,
+    "termin": 34,
+    "skutek": 1
+   }
+  },
+  "kp": {
+   "total": 604,
+   "kinds": {
+    "organ": 18,
+    "tryb": 235,
+    "termin": 316,
+    "skutek": 5,
+    "ulamek": 24,
+    "liczba": 1,
+    "sankcja": 5
+   }
+  },
+  "zwolnienia-grupowe": {
+   "total": 24,
+   "kinds": {
+    "termin": 14,
+    "ulamek": 2,
+    "tryb": 8
+   }
+  },
+  "ksh": {
+   "total": 1195,
+   "kinds": {
+    "ulamek": 84,
+    "tryb": 727,
+    "termin": 311,
+    "skutek": 22,
+    "organ": 10,
+    "kwota": 21,
+    "wiekszosc": 8,
+    "sankcja": 12
+   }
+  },
+  "krs": {
+   "total": 111,
+   "kinds": {
+    "sad": 1,
+    "organ": 19,
+    "tryb": 66,
+    "termin": 21,
+    "kwota": 1,
+    "ulamek": 1,
+    "sankcja": 2
+   }
+  },
+  "kk": {
+   "total": 1386,
+   "kinds": {
+    "sankcja": 878,
+    "kwota": 16,
+    "skutek": 36,
+    "termin": 275,
+    "tryb": 168,
+    "ulamek": 12,
+    "organ": 1
+   }
+  },
+  "kpk": {
+   "total": 1216,
+   "kinds": {
+    "tryb": 786,
+    "sankcja": 1,
+    "termin": 211,
+    "kwota": 4,
+    "sad": 84,
+    "organ": 124,
+    "skutek": 4,
+    "ulamek": 2
+   }
+  },
+  "kw": {
+   "total": 371,
+   "kinds": {
+    "kwota": 84,
+    "skutek": 24,
+    "sankcja": 224,
+    "termin": 23,
+    "ulamek": 1,
+    "tryb": 15
+   }
+  },
+  "kpsw": {
+   "total": 215,
+   "kinds": {
+    "tryb": 133,
+    "sad": 20,
+    "organ": 14,
+    "termin": 46,
+    "kwota": 2
+   }
+  },
+  "kks": {
+   "total": 487,
+   "kinds": {
+    "skutek": 15,
+    "sankcja": 273,
+    "tryb": 124,
+    "termin": 53,
+    "ulamek": 8,
+    "organ": 8,
+    "sad": 6
+   }
+  },
+  "przewleklosc": {
+   "total": 28,
+   "kinds": {
+    "tryb": 7,
+    "sad": 12,
+    "termin": 5,
+    "kwota": 4
+   }
+  },
+  "ochrona-zwierzat": {
+   "total": 68,
+   "kinds": {
+    "tryb": 41,
+    "termin": 13,
+    "ulamek": 1,
+    "sankcja": 13
+   }
+  },
+  "kpa": {
+   "total": 287,
+   "kinds": {
+    "tryb": 214,
+    "organ": 15,
+    "termin": 53,
+    "sad": 4,
+    "skutek": 1
+   }
+  },
+  "ppsa": {
+   "total": 347,
+   "kinds": {
+    "organ": 62,
+    "tryb": 207,
+    "termin": 70,
+    "skutek": 1,
+    "sad": 1,
+    "ulamek": 5,
+    "wiekszosc": 1
+   }
+  },
+  "usg": {
+   "total": 252,
+   "kinds": {
+    "tryb": 114,
+    "organ": 19,
+    "termin": 90,
+    "ulamek": 11,
+    "wiekszosc": 10,
+    "kwota": 2,
+    "liczba": 5,
+    "skutek": 1
+   }
+  },
+  "tue": {
+   "total": 42,
+   "kinds": {
+    "ulamek": 4,
+    "tryb": 30,
+    "termin": 8
+   }
+  },
+  "tfue": {
+   "total": 262,
+   "kinds": {
+    "tryb": 181,
+    "organ": 12,
+    "termin": 55,
+    "ulamek": 13,
+    "skutek": 1
+   }
+  },
+  "ekpc": {
+   "total": 89,
+   "kinds": {
+    "skutek": 1,
+    "tryb": 64,
+    "termin": 20,
+    "ulamek": 3,
+    "organ": 1
+   }
+  },
+  "kssip": {
+   "total": 278,
+   "kinds": {
+    "organ": 57,
+    "tryb": 77,
+    "liczba": 16,
+    "termin": 94,
+    "ulamek": 24,
+    "sad": 10
+   }
+  }
+ }
+}
