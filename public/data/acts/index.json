@@ -45,8 +45,8 @@
   "abbr": "u.SN",
   "group": "ustroj",
   "changeDate": "2026-09-16T09:29:27",
-  "articles": 135,
-  "bytes": 166963,
+  "articles": 145,
+  "bytes": 173352,
   "wykazNo": 4
  },
  {
@@ -59,7 +59,7 @@
   "changeDate": "2026-10-22T00:00:00",
   "textDate": "2026-09-16",
   "articles": 313,
-  "bytes": 452763,
+  "bytes": 452772,
   "wykazNo": 5
  },
  {
@@ -70,8 +70,8 @@
   "abbr": "p.o.p.",
   "group": "ustroj",
   "changeDate": "2026-10-21T00:00:00",
-  "articles": 200,
-  "bytes": 268211,
+  "articles": 215,
+  "bytes": 278577,
   "wykazNo": 6
  },
  {
@@ -84,7 +84,7 @@
   "changeDate": "2026-10-16T12:33:32",
   "textDate": "2026-10-16",
   "articles": 1196,
-  "bytes": 586916,
+  "bytes": 586927,
   "wykazNo": 7
  },
  {
@@ -97,7 +97,7 @@
   "changeDate": "2026-10-16T12:39:35",
   "textDate": "2026-10-16",
   "articles": 1827,
-  "bytes": 1363452,
+  "bytes": 1363703,
   "wykazNo": 8
  },
  {
@@ -110,7 +110,7 @@
   "changeDate": "2026-08-21T08:42:52",
   "textDate": "2026-08-21",
   "articles": 117,
-  "bytes": 77405,
+  "bytes": 77406,
   "wykazNo": 9
  },
  {
@@ -121,8 +121,8 @@
   "abbr": "u.k.s.c.",
   "group": "cywilne",
   "changeDate": "2026-08-18T09:09:52",
-  "articles": 160,
-  "bytes": 113290,
+  "articles": 168,
+  "bytes": 117626,
   "wykazNo": 10
  },
  {
@@ -133,8 +133,8 @@
   "abbr": "k.r.o.",
   "group": "cywilne",
   "changeDate": "2026-07-10T11:02:11",
-  "articles": 225,
-  "bytes": 141278,
+  "articles": 239,
+  "bytes": 147061,
   "wykazNo": 11
  },
  {
@@ -145,8 +145,8 @@
   "abbr": "k.p.",
   "group": "pracy",
   "changeDate": "2026-10-14T09:58:16",
-  "articles": 363,
-  "bytes": 408274,
+  "articles": 393,
+  "bytes": 411373,
   "wykazNo": 12
  },
  {
@@ -159,7 +159,7 @@
   "changeDate": "2026-09-14T09:00:28",
   "textDate": "2026-09-14",
   "articles": 15,
-  "bytes": 19441,
+  "bytes": 19446,
   "wykazNo": 13
  },
  {
@@ -172,7 +172,7 @@
   "changeDate": "2026-06-03T14:55:21",
   "textDate": "2026-06-03",
   "articles": 916,
-  "bytes": 833087,
+  "bytes": 833168,
   "wykazNo": 14
  },
  {
@@ -185,7 +185,7 @@
   "changeDate": "2026-09-14T00:00:00",
   "textDate": "2026-07-28",
   "articles": 81,
-  "bytes": 153536,
+  "bytes": 153565,
   "wykazNo": 15
  },
  {
@@ -210,7 +210,7 @@
   "changeDate": "2026-07-17T13:44:47",
   "textDate": "2026-07-17",
   "articles": 925,
-  "bytes": 862398,
+  "bytes": 862417,
   "wykazNo": 17
  },
  {
@@ -236,7 +236,7 @@
   "changeDate": "2026-10-21T11:22:59",
   "textDate": "2026-10-21",
   "articles": 132,
-  "bytes": 149540,
+  "bytes": 149543,
   "wykazNo": 19
  },
  {
@@ -300,7 +300,7 @@
   "changeDate": "2026-10-09T09:30:05",
   "textDate": "2026-10-09",
   "articles": 333,
-  "bytes": 232460,
+  "bytes": 232463,
   "wykazNo": 24
  },
  {
@@ -313,7 +313,7 @@
   "changeDate": "2026-10-08T15:43:48",
   "textDate": "2026-10-08",
   "articles": 153,
-  "bytes": 161392,
+  "bytes": 161410,
   "wykazNo": 25
  },
  {
@@ -362,6 +362,6 @@
   "changeDate": "2026-04-09T12:28:42",
   "textDate": "2026-04-09",
   "articles": 99,
-  "bytes": 132008
+  "bytes": 132010
  }
 ]

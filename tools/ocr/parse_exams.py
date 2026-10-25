@@ -147,14 +147,14 @@ def page_lines(page):
 
 
 QNUM_RE = re.compile(r'^(\d{1,3})\s*[\.,;:]\s*(.*)$')
-OPT_RE = re.compile(r'^([ABC8])\s*[\.\),:;]\s*(.*)$')
+OPT_RE = re.compile(r'^([ABCD8])\s*[\.\),:;]\s*(.*)$')
 
 
 def norm_option_letter(ch, expected):
     ch = ch.upper()
     if ch == '8':
         ch = 'B'
-    return ch if ch in 'ABC' else expected
+    return ch if ch in 'ABCD' else expected
 
 
 def is_noise(ln, text):
@@ -202,7 +202,9 @@ def all_lines(ocr):
     return out
 
 
-def parse_test(ocr):
+def parse_test(ocr, n_opts=3):
+    letters = 'ABCD'[:n_opts]
+    last = letters[-1]
     lines = all_lines(ocr)
     start = None
     for i, ln in enumerate(lines):
@@ -228,14 +230,14 @@ def parse_test(ocr):
         text = ln['t']
         r = qnum(text, expected)
         new_q = None
-        if r and abs(ln['x'] - q_x) < 0.05 and expected <= r[0] <= expected + 2 and (cur is None or cur_field == 'C' or r[0] == expected):
+        if r and abs(ln['x'] - q_x) < 0.05 and expected <= r[0] <= expected + 2 and (cur is None or cur_field == last or r[0] == expected):
             new_q = r
-        elif cur is not None and cur_field == 'C' and cur['a'][2] and ln['x'] < opt_x - 0.006:
+        elif cur is not None and cur_field == last and cur['a'][-1] and ln['x'] < opt_x - 0.006:
             # numer pytania nie został rozpoznany przez OCR – nowe pytanie rozpoznajemy po wcięciu
             stripped = re.sub(r'^[0-9lIiSsOo]{1,3}\s*[\.,;:]\s*', '', text)
             new_q = (expected, stripped)
         if new_q:
-            cur = {'n': new_q[0], 'q': new_q[1], 'a': ['', '', '']}
+            cur = {'n': new_q[0], 'q': new_q[1], 'a': [''] * n_opts}
             questions.append(cur)
             cur_field = 'q'
             expected = new_q[0] + 1
@@ -243,17 +245,17 @@ def parse_test(ocr):
         if cur is None:
             continue
         mo = OPT_RE.match(text)
-        want = 'A' if cur_field == 'q' else ('B' if cur_field == 'A' else 'C')
-        if mo and ln['x'] > q_x - 0.02 and cur_field != 'C':
+        want = 'A' if cur_field == 'q' else (letters[letters.index(cur_field) + 1] if cur_field in letters and cur_field != last else None)
+        if mo and want and ln['x'] > q_x - 0.02:
             letter = norm_option_letter(mo.group(1), want)
             if letter == want:
                 cur_field = letter
-                cur['a']['ABC'.index(letter)] = mo.group(2).strip()
+                cur['a'][letters.index(letter)] = mo.group(2).strip()
                 continue
         if cur_field == 'q':
             cur['q'] = join(cur['q'], text)
-        elif cur_field in ('A', 'B', 'C'):
-            i = 'ABC'.index(cur_field)
+        elif cur_field in letters:
+            i = letters.index(cur_field)
             cur['a'][i] = join(cur['a'][i], text)
     return questions
 
@@ -262,27 +264,23 @@ INLINE_RE = re.compile(r'\s([ABC])[\.\)]\s')
 
 
 def split_inline(q):
-    """Odpowiedzi zlane w jedną linię („… A. x, B. y, C. z”) rozdzielamy na trzy pola."""
+    """Odpowiedzi zlane w jedną linię („… A. x, B. y, C. z”) rozdzielamy na osobne pola."""
+    n = len(q['a'])
+    letters = 'ABCD'[:n]
     if not q['a'][0]:
-        m = re.search(r'\sA[\.\)]\s(.+?)\sB[\.\)]\s(.+?)\sC[\.\)]\s(.+)$', q['q'])
+        pat = r'\s' + r'\s'.join(f'{l}[\\.\\)]\\s(.+?)' for l in letters) + r'$'
+        m = re.search(pat.replace('\\\\', '\\'), q['q'])
         if m:
             q['q'] = q['q'][:m.start()].strip()
-            q['a'] = [m.group(1).strip(), m.group(2).strip(), m.group(3).strip()]
+            q['a'] = [g.strip() for g in m.groups()]
             return q
-    for i, nxt in ((0, 'B'), (1, 'C')):
+    for i in range(n - 1):
         if q['a'][i] and not q['a'][i + 1]:
-            m = re.search(rf'\s{nxt}[\.\)]\s', ' ' + q['a'][i])
+            full = ' ' + q['a'][i]
+            m = re.search(rf'\s{letters[i + 1]}[\.\)]\s', full)
             if m:
-                full = ' ' + q['a'][i]
-                head, tail = full[:m.start()].strip(), full[m.end():].strip()
-                q['a'][i] = head
-                if i == 0 and not q['a'][2]:
-                    m2 = re.search(r'\sC[\.\)]\s', ' ' + tail)
-                    if m2:
-                        t2 = ' ' + tail
-                        q['a'][1], q['a'][2] = t2[:m2.start()].strip(), t2[m2.end():].strip()
-                        continue
-                q['a'][i + 1] = tail
+                q['a'][i] = full[:m.start()].strip()
+                q['a'][i + 1] = full[m.end():].strip()
     return q
 
 
@@ -319,7 +317,7 @@ def parse_key_text(ocr):
                 continue
             if n is None:
                 continue
-            if re.fullmatch(r'[ABC]', t) and rows[n][0] is None:
+            if re.fullmatch(r'[ABCD]', t) and rows[n][0] is None:
                 rows[n][0] = t
             elif rows[n][0] is not None or t.startswith('art'):
                 rows[n][1] = (rows[n][1] + ' ' + t).strip()
@@ -355,7 +353,7 @@ def reocr_letters(exam_id, cells):
     found = {}
     for img, obs in res.items():
         txt = ' '.join(o['t'] for o in obs).strip().upper().replace('8', 'B')
-        m = re.search(r'\b([ABC])\b', txt) or re.fullmatch(r'([ABC])\.?', txt)
+        m = re.search(r'\b([ABCD])\b', txt) or re.fullmatch(r'([ABCD])\.?', txt)
         if m:
             found[paths[img]] = m.group(1)
     return found
@@ -371,7 +369,7 @@ def parse_key(ocr, exam_id=''):
             if o['t'].strip() and not WATERMARK_RE.search(o['t']):
                 all_obs.append((pk, o))
     num_x = median([o['x'] for _, o in all_obs if re.fullmatch(r'\d{1,3}\.?', o['t'].strip())], 0.08)
-    let_x = median([o['x'] for _, o in all_obs if re.fullmatch(r'[ABC]\.?', o['t'].strip())], num_x + 0.09)
+    let_x = median([o['x'] for _, o in all_obs if re.fullmatch(r'[ABCD]\.?', o['t'].strip())], num_x + 0.09)
     bas_x = median([o['x'] for _, o in all_obs if o['t'].strip().lower().startswith('art')], let_x + 0.07)
     rows = []  # (pk, y, num|None, letter|None, h)
     basis = []
@@ -381,7 +379,7 @@ def parse_key(ocr, exam_id=''):
         if o['y'] < 0.12 and re.search(r'KLUCZ|Numer|Prawid|Podstawa|odpowied|kolejny|pytania|Odpowied', t):
             continue
         if abs(o['x'] - num_x) < 0.035 and len(t) <= 5:
-            mm = re.match(r'^([0-9lIiSs]{1,3})\s*[\.,]?\s*([ABC])?$', t)
+            mm = re.match(r'^([0-9lIiSs]{1,3})\s*[\.,]?\s*([ABCD])?$', t)
             num = None
             letter = None
             if mm:
@@ -389,7 +387,7 @@ def parse_key(ocr, exam_id=''):
                 num = int(raw) if raw.isdigit() else None
                 letter = mm.group(2)
             rows.append([pk, cy, num, letter, o['h']])
-        elif abs(o['x'] - let_x) < 0.04 and re.fullmatch(r'[ABC8]\.?', t):
+        elif abs(o['x'] - let_x) < 0.04 and re.fullmatch(r'[ABCD8]\.?', t):
             rows.append([pk, cy, None, 'B' if t[0] == '8' else t[0], o['h']])
         elif o['x'] >= bas_x - 0.05:
             basis.append((pk, o['y'], cy, t))
@@ -550,7 +548,9 @@ def main():
         kp = os.path.join(OCR_DIR, f"{e['id']}__key.json")
         if not (os.path.exists(tp) and os.path.exists(kp)):
             continue
-        qs = [split_inline(q) for q in parse_test(json.load(open(tp))) if q['n'] <= 150]
+        ocr_test = json.load(open(tp))
+        n_opts = 4 if sum(1 for pg in ocr_test['pages'].values() for o in pg if re.match(r'^D\s*[\.\)]\s', o['t'].strip())) > 50 else 3
+        qs = [split_inline(q) for q in parse_test(ocr_test, n_opts) if q['n'] <= 150]
         key = parse_key(json.load(open(kp)), e['id'])
         corr = CORRECTIONS.get(e['id'], {})
         out_q = []
@@ -606,6 +606,7 @@ def main():
                 item['cancelled'] = True
             out_q.append(item)
         bad = [q['n'] for q in out_q if not q['q'] or any(not a for a in q['a'])]
+        n_opts_report = len(out_q[0]['a']) if out_q else 3
         nums = {q['n'] for q in out_q}
         expected_total = max(nums) if nums else 0
         gaps = [n for n in range(1, expected_total + 1) if n not in nums]
@@ -617,6 +618,7 @@ def main():
             'kind': e['kind'],
             'label': e['label'],
             'durationMin': 150,
+            'options': n_opts,
             'source': {
                 'page': MANIFEST['base'] + e['page'],
                 'test': MANIFEST['base'] + e['test'],

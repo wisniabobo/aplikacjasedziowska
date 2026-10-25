@@ -276,10 +276,15 @@ export function parseActLines(lines: PdfLine[], opts: ParseOptions = {}): Parsed
   }
 
   for (const a of articles) {
-    for (const ln of a.lines) ln.text = ln.text.replace(/\s+/g, ' ').trim();
+    for (const ln of a.lines) ln.text = fixSpacing(ln.text.replace(/\s+/g, ' ').trim());
     a.lines = a.lines.filter((ln) => ln.text !== '' || ln.mark);
   }
   return { toc: cleanToc(toc), articles, basedOn, textDate, preamble: preamble.length ? preamble : undefined };
+}
+
+/** Brakujące spacje obecne w samych PDF-ach Kancelarii Sejmu („niewięcej niż” → „nie więcej niż”). */
+export function fixSpacing(t: string): string {
+  return t.replace(/(?<![\p{L}])nie(więcej|później|wcześniej|dłużej|krócej|mniej|wyższ\p{L}*|niższ\p{L}*)(?=\s+niż)/gu, 'nie $1');
 }
 
 function startLine(text: string): ActLine | null {

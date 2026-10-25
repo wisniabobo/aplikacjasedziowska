@@ -69,8 +69,8 @@ export default function Session() {
     const onKey = (e: KeyboardEvent) => {
       if (e.target instanceof HTMLInputElement || e.target instanceof HTMLTextAreaElement || e.metaKey || e.ctrlKey) return;
       const k = e.key.toLowerCase();
-      const map: Record<string, number> = { '1': 0, '2': 1, '3': 2, a: 0, b: 1, c: 2 };
-      if (k in map && selected === null) {
+      const map: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, a: 0, b: 1, c: 2, d: 3 };
+      if (k in map && selected === null && q && map[k]! < q.options.length) {
         e.preventDefault();
         choose(map[k]!);
       } else if ((k === 'enter' || k === ' ' || k === 'arrowright') && selected !== null) {
@@ -80,7 +80,7 @@ export default function Session() {
     };
     window.addEventListener('keydown', onKey);
     return () => window.removeEventListener('keydown', onKey);
-  }, [choose, next, selected]);
+  }, [choose, next, selected, q]);
 
   const subtitle = useMemo(() => {
     if (mode === 'act' && act) return ACT_BY_SLUG[act]?.short;
@@ -159,7 +159,7 @@ export default function Session() {
                   <Row
                     key={wq.id}
                     title={wq.source === 'official' ? wq.text!.slice(0, 120) + (wq.text!.length > 120 ? '…' : '') : `${wq.label}: ${wq.options[wq.correct]}`}
-                    sub={wq.source === 'official' ? `${wq.label} · poprawna: ${'ABC'[wq.correct]}. ${wq.options[wq.correct]}` : 'Odpowiedź z treści przepisu'}
+                    sub={wq.source === 'official' ? `${wq.label} · poprawna: ${'ABCD'[wq.correct]}. ${wq.options[wq.correct]}` : 'Odpowiedź z treści przepisu'}
                     to={wq.act && wq.artId ? `/ustawy/${wq.act}/${wq.artId}` : wq.refs?.[0] ? `/ustawy/${wq.refs[0].act}` : undefined}
                   />
                 ))}

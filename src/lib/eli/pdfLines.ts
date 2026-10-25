@@ -97,7 +97,8 @@ function joinItems(items: Item[], bodySize: number): string {
       s = toSuperscript(s.trim().replace(/^\[([0-9a-z]+)\]$/, '$1'));
     }
     const gap = it.x - prevEnd;
-    if (out !== '' && !out.endsWith(' ') && !s.startsWith(' ') && gap > bodySize * 0.18 && !isSup) {
+    // Osobne elementy tekstu z widoczną przerwą (≥ ok. 1 pt) to granica słów; elementy w obrębie słowa stykają się.
+    if (out !== '' && !out.endsWith(' ') && !s.startsWith(' ') && gap > bodySize * 0.075 && !isSup && !s.startsWith('-') && !out.endsWith('-')) {
       out += ' ';
     }
     out += s;
@@ -187,7 +188,8 @@ export async function extractPdfLines(doc: PdfDocLike, opts: ExtractOptions = {}
       const x = Math.min(...visible.map((i) => i.x));
       const x2 = Math.max(...visible.map((i) => i.x2));
       let zone: LineZone = 'body';
-      if (opts.splitX === undefined && (g.base < 68 || g.base > height - 40)) zone = 'header';
+      // Nagłówek Kancelarii Sejmu leży ok. 54 pt od góry; pierwsza linia treści zaczyna się ok. 67–69 pt.
+      if (opts.splitX === undefined && (g.base < 61 || g.base > height - 36)) zone = 'header';
       if (/^©\s?Kancelaria Sejmu/.test(text) || /^s\. \d+\/\d+$/.test(text) || /^\d{4}-\d{2}-\d{2}$/.test(text)) {
         zone = 'header';
       }

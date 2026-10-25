@@ -1,6 +1,6 @@
 {
- "generatedAt": "2026-10-25T17:10:31.637Z",
- "total": 13200,
+ "generatedAt": "2026-10-25T17:37:03.486Z",
+ "total": 13310,
  "perAct": {
   "konstytucja": {
    "total": 424,
@@ -36,11 +36,11 @@
    }
   },
   "sn": {
-   "total": 377,
+   "total": 396,
    "kinds": {
-    "organ": 135,
-    "tryb": 114,
-    "termin": 65,
+    "organ": 145,
+    "tryb": 121,
+    "termin": 67,
     "liczba": 21,
     "ulamek": 30,
     "wiekszosc": 3,
@@ -62,13 +62,13 @@
    }
   },
   "prok": {
-   "total": 470,
+   "total": 496,
    "kinds": {
-    "organ": 150,
-    "tryb": 174,
+    "organ": 154,
+    "tryb": 186,
+    "termin": 110,
     "sad": 13,
     "liczba": 7,
-    "termin": 100,
     "ulamek": 26
    }
   },
@@ -105,11 +105,11 @@
    }
   },
   "uksc": {
-   "total": 207,
+   "total": 218,
    "kinds": {
-    "tryb": 66,
-    "organ": 4,
-    "kwota": 120,
+    "tryb": 72,
+    "organ": 5,
+    "kwota": 124,
     "ulamek": 2,
     "termin": 11,
     "sankcja": 2,
@@ -117,19 +117,19 @@
    }
   },
   "kro": {
-   "total": 182,
+   "total": 190,
    "kinds": {
-    "tryb": 147,
-    "termin": 34,
+    "tryb": 154,
+    "termin": 35,
     "skutek": 1
    }
   },
   "kp": {
-   "total": 604,
+   "total": 650,
    "kinds": {
-    "organ": 18,
-    "tryb": 235,
-    "termin": 316,
+    "organ": 19,
+    "tryb": 252,
+    "termin": 344,
     "skutek": 5,
     "ulamek": 24,
     "liczba": 1,

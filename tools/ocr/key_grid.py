@@ -215,7 +215,7 @@ def process(exam_id):
         t = math.tan(math.radians(angle))
         obs = [o for o in page_ocr.get(pk, []) if o['t'].strip()]
         num_obs = [o for o in obs if re.fullmatch(r'[0-9lIS]{1,3}\s*[\.,]?', o['t'].strip())]
-        let_obs = [o for o in obs if re.fullmatch(r'[ABC8]\.?', o['t'].strip())]
+        let_obs = [o for o in obs if re.fullmatch(r'[ABCD8]\.?', o['t'].strip())]
         num_x = median([o['x'] for o in num_obs], 0.06)
         let_x = median([o['x'] for o in let_obs if o['x'] > num_x + 0.03], num_x + 0.1)
         page_rows = {}
@@ -236,10 +236,10 @@ def process(exam_id):
                 tt = o['t'].strip()
                 if not num_t and not letter_t and not rest and re.fullmatch(r'[0-9lIiSsOoBZ|]{1,3}\s*[\.,]?', tt) and o['x'] < let_x - 0.01:
                     num_t = tt
-                elif not letter_t and not rest and re.fullmatch(r'[ABC8]\.?', tt):
+                elif not letter_t and not rest and re.fullmatch(r'[ABCD8]\.?', tt):
                     letter_t = tt
-                elif re.fullmatch(r'([0-9]{1,3})\s*[\.,]?\s*([ABC])', tt) and not num_t:
-                    mm = re.fullmatch(r'([0-9]{1,3})\s*[\.,]?\s*([ABC])', tt)
+                elif re.fullmatch(r'([0-9]{1,3})\s*[\.,]?\s*([ABCD])', tt) and not num_t:
+                    mm = re.fullmatch(r'([0-9]{1,3})\s*[\.,]?\s*([ABCD])', tt)
                     num_t, letter_t = mm.group(1), mm.group(2)
                 else:
                     rest.append(o)
@@ -248,7 +248,7 @@ def process(exam_id):
                 continue
             row = {'page': pk, 'row': r, 'numText': num_t, 'letterText': letter_t, 'basis': basis_t}
             has_num = re.fullmatch(r'\s*[0-9lIiSsOoBZ|]{1,3}\s*[\.,]?\s*', num_t) is not None
-            has_letter = re.fullmatch(r'[ABC8]\.?', letter_t.strip()) is not None
+            has_letter = re.fullmatch(r'[ABCD8]\.?', letter_t.strip()) is not None
             starts_basis = re.match(r'^(art|argument|§|Art)', basis_t.strip()) is not None
             if not has_num and not has_letter and not starts_basis:
                 # fałszywa linia tabeli (np. podkreślenie tekstu) – dokładamy podstawę do poprzedniego wiersza
@@ -271,7 +271,7 @@ def process(exam_id):
     labeled = []
     for row, path in cells:
         lt = row['letterText'].strip().upper().replace('8', 'B').rstrip('.')
-        if lt in ('A', 'B', 'C') and feats[id(row)] is not None:
+        if lt in ('A', 'B', 'C', 'D') and feats[id(row)] is not None:
             labeled.append((lt, feats[id(row)]))
     for row, path in cells:
         lt = row['letterText'].strip().upper().replace('8', 'B').rstrip('.')
@@ -281,7 +281,7 @@ def process(exam_id):
         dists = sorted((sum(abs(a - b) for a, b in zip(f, g)), l) for l, g in labeled)
         top = [l for _, l in dists[:5]]
         guess = max(set(top), key=top.count)
-        if lt not in ('A', 'B', 'C'):
+        if lt not in ('A', 'B', 'C', 'D'):
             row['letterText'] = guess
             row['template'] = True
         elif guess != lt and top.count(guess) >= 4:
@@ -314,7 +314,7 @@ def process(exam_id):
         seg = list(pending)
         while len(seg) > expected >= 0:
             # nadmiarowy wiersz: najpierw bez litery, potem bez „art.” na początku podstawy
-            cand = [r for r in seg if not re.fullmatch(r'[ABC8]\.?', r['letterText'].strip())] or \
+            cand = [r for r in seg if not re.fullmatch(r'[ABCD8]\.?', r['letterText'].strip())] or \
                    [r for r in seg if not re.match(r'^(art|Art|argument)', r['basis'])] or [seg[-1]]
             drop = cand[-1]
             idx = cleaned.index(drop) if drop in cleaned else -1
@@ -346,7 +346,7 @@ def process(exam_id):
 
     for row in rows:
         lt = row['letterText'].strip().upper().replace('8', 'B').rstrip('.')
-        row['letter'] = lt if lt in ('A', 'B', 'C') else None
+        row['letter'] = lt if lt in ('A', 'B', 'C', 'D') else None
     out = {'id': exam_id, 'rows': rows}
     json.dump(out, open(os.path.join(OUT_DIR, f'{exam_id}__keygrid.json'), 'w'), ensure_ascii=False, indent=0)
     missing = [r['n'] for r in rows if r['letter'] is None]

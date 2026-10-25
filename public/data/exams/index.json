@@ -140,8 +140,8 @@
   "kind": "sedziowska-prokuratorska",
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2017",
   "count": 150,
-  "withKey": 144,
-  "verified": 144
+  "withKey": 148,
+  "verified": 146
  },
  {
   "id": "ao-2016",
@@ -149,8 +149,8 @@
   "kind": "ogolna",
   "label": "Konkurs na aplikację ogólną 2016",
   "count": 150,
-  "withKey": 139,
-  "verified": 125
+  "withKey": 143,
+  "verified": 128
  },
  {
   "id": "ao-2015",
@@ -158,17 +158,17 @@
   "kind": "ogolna",
   "label": "Konkurs na aplikację ogólną 2015",
   "count": 150,
-  "withKey": 133,
-  "verified": 117
+  "withKey": 150,
+  "verified": 150
  },
  {
   "id": "ao-2014",
   "year": 2014,
   "kind": "ogolna",
   "label": "Konkurs na aplikację ogólną 2014",
-  "count": 136,
-  "withKey": 110,
-  "verified": 106
+  "count": 134,
+  "withKey": 122,
+  "verified": 114
  },
  {
   "id": "ao-2013",
@@ -176,7 +176,7 @@
   "kind": "ogolna",
   "label": "Konkurs na aplikację ogólną 2013",
   "count": 150,
-  "withKey": 149,
+  "withKey": 150,
   "verified": 149
  },
  {

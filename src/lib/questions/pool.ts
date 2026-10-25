@@ -17,8 +17,8 @@ export interface UIQuestion {
   text?: string;
   before?: string;
   after?: string;
-  options: [string, string, string];
-  correct: 0 | 1 | 2;
+  options: string[];
+  correct: number;
   label: string;
   kind?: QuestionKind;
   year?: number;
@@ -68,7 +68,8 @@ export function clearGeneratedCache(slug?: string) {
 
 export function fromOfficial(exam: ExamDoc, q: ExamDoc['questions'][number]): UIQuestion | null {
   if (!q.correct || q.a.some((a) => !a) || !q.q) return null;
-  const correct = 'ABC'.indexOf(q.correct) as 0 | 1 | 2;
+  const correct = 'ABCD'.indexOf(q.correct);
+  if (correct < 0 || correct >= q.a.length) return null;
   const first = q.refs[0];
   return {
     id: `o:${exam.id}:${q.n}`,

@@ -5,7 +5,7 @@ import type { UIQuestion } from '../lib/questions/pool';
 import { ArticleSnippet } from './ArticleView';
 import { Icon } from './Icon';
 
-const LETTERS = ['A', 'B', 'C'] as const;
+const LETTERS = ['A', 'B', 'C', 'D'] as const;
 
 export function QuestionText({ q }: { q: UIQuestion }) {
   if (q.source === 'official') return <p className="q-text">{q.text}</p>;

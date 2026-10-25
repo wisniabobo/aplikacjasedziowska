@@ -118,8 +118,9 @@ export default function ExamRun() {
     const onKey = (e: KeyboardEvent) => {
       if (e.metaKey || e.ctrlKey || e.target instanceof HTMLTextAreaElement) return;
       const k = e.key.toLowerCase();
-      const map: Record<string, number> = { '1': 0, '2': 1, '3': 2, a: 0, b: 1, c: 2 };
-      if (k in map) setAnswers((arr) => arr.map((v, i) => (i === cur ? map[k]! : v)));
+      const map: Record<string, number> = { '1': 0, '2': 1, '3': 2, '4': 3, a: 0, b: 1, c: 2, d: 3 };
+      const nOpts = questions?.[cur]?.options.length ?? 3;
+      if (k in map && map[k]! < nOpts) setAnswers((arr) => arr.map((v, i) => (i === cur ? map[k]! : v)));
       else if (k === 'arrowright') setCur((c) => Math.min((questions?.length ?? 1) - 1, c + 1));
       else if (k === 'arrowleft') setCur((c) => Math.max(0, c - 1));
     };
@@ -151,7 +152,7 @@ export default function ExamRun() {
             <Section title="Zasady jak na konkursie">
               <div className="list">
                 <Row title="Liczba pytań" value={isSim ? '150' : String(exam.data!.questions.filter((q) => q.correct).length)} chevron={false} />
-                <Row title="Odpowiedzi" value="3, jedna prawidłowa" chevron={false} />
+                <Row title="Odpowiedzi" value={`${isSim ? 3 : exam.data?.options ?? 3}, jedna prawidłowa`} chevron={false} />
                 <Row title="Czas" value={`${STAGES.test.minutes} minut`} chevron={false} />
                 <Row title="Punktacja" value="1 pkt za poprawną" chevron={false} />
               </div>
@@ -305,7 +306,7 @@ export default function ExamRun() {
                 className={`option${answers[cur] === i ? ' selected' : ''}`}
                 onClick={() => setAnswers((arr) => arr.map((v, j) => (j === cur ? (v === i ? null : i) : v)))}
               >
-                <span className="letter" aria-hidden="true">{'ABC'[i]}</span>
+                <span className="letter" aria-hidden="true">{'ABCD'[i]}</span>
                 <span>{opt}</span>
               </button>
             ))}

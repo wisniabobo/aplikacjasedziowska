@@ -24,8 +24,8 @@ export function loadJson<T>(path: string): Promise<T> {
 export interface ExamQuestion {
   n: number;
   q: string;
-  a: [string, string, string];
-  correct: 'A' | 'B' | 'C' | null;
+  a: string[];
+  correct: 'A' | 'B' | 'C' | 'D' | null;
   keyVerified: boolean;
   basis: string;
   refs: { act: string; art: string }[];
@@ -38,6 +38,8 @@ export interface ExamDoc {
   kind: 'ogolna' | 'sedziowska-prokuratorska' | 'uzupelniajaca';
   label: string;
   durationMin: number;
+  /** Liczba odpowiedzi w pytaniu (do 2017 r. – 4, od 2018 r. – 3). */
+  options?: number;
   source: { page: string; test: string; key: string };
   questions: ExamQuestion[];
 }
