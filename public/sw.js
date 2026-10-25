@@ -1,5 +1,5 @@
 /* Service worker: aplikacja i dane działają offline po pierwszym otwarciu. */
-const VERSION = 'v1';
+const VERSION = 'v2';
 const SHELL = `shell-${VERSION}`;
 const DATA = `data-${VERSION}`;
 
@@ -15,6 +15,19 @@ self.addEventListener('activate', (event) => {
       .then(() => self.clients.claim()),
   );
 });
+
+async function networkFirst(request, cacheName) {
+  const cache = await caches.open(cacheName);
+  try {
+    const res = await fetch(request);
+    if (res.ok) cache.put(request, res.clone());
+    return res;
+  } catch {
+    const cached = await cache.match(request);
+    if (cached) return cached;
+    throw new Error('offline');
+  }
+}
 
 async function staleWhileRevalidate(request, cacheName) {
   const cache = await caches.open(cacheName);
@@ -45,8 +58,9 @@ self.addEventListener('fetch', (event) => {
     );
     return;
   }
+  // Teksty ustaw i pytania – zawsze najnowsze z serwera, z pamięci tylko bez połączenia.
   if (url.pathname.includes('/data/')) {
-    event.respondWith(staleWhileRevalidate(request, DATA));
+    event.respondWith(networkFirst(request, DATA));
     return;
   }
   event.respondWith(staleWhileRevalidate(request, SHELL));
