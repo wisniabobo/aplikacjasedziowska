@@ -87,6 +87,38 @@ function SejmStatus() {
 
 const a10 = (s: string) => (s ?? '').slice(0, 10);
 
+function Hero({ total }: { total: number }) {
+  const points = [
+    'Oficjalne testy KSSiP z lat 2010–2026 z kluczem i podstawą prawną',
+    `${total ? total.toLocaleString('pl-PL') : '13 000'}+ pytań z aktualnego brzmienia przepisów`,
+    'Symulacja egzaminu, powtórki i analiza słabych dziedzin',
+    'Kazusy z kryteriami oceny i 28 ustaw z wykazu w jednym miejscu',
+  ];
+  return (
+    <section className="hero" aria-labelledby="hero-title">
+      <h2 id="hero-title">Zdaj konkurs na aplikację sędziowską</h2>
+      <p>Wszystko, czego potrzebujesz do I i II etapu konkursu w KSSiP – ucz się codziennie po kilkanaście minut i obserwuj, jak rośnie wynik.</p>
+      <ul>
+        {points.map((p) => (
+          <li key={p}>
+            <Icon name="check" size={20} />
+            {p}
+          </li>
+        ))}
+      </ul>
+      <div style={{ display: 'flex', gap: 10, flexWrap: 'wrap' }}>
+        <Link to="/nauka/sesja?mode=mix" className="btn primary">
+          <Icon name="play" size={18} /> Zacznij naukę
+        </Link>
+        <Link to="/nauka/egzamin/symulacja" className="btn ghost">
+          Sprawdź się w symulacji
+        </Link>
+      </div>
+    </section>
+  );
+}
+
+
 export function Home() {
   const progress = useProgress();
   const stats = useAsync(loadQuestionStats, []);
@@ -115,6 +147,11 @@ export function Home() {
           </Link>
         }
       />
+      {totals.a < 30 && (
+        <Section>
+          <Hero total={generated} />
+        </Section>
+      )}
       <Section>
         <Countdown />
       </Section>

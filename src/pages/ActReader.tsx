@@ -236,7 +236,7 @@ export default function ActReader() {
                             type="button"
                             aria-label="Kopiuj link do artykułu"
                             onClick={() => {
-                              const url = `${window.location.origin}${window.location.pathname}#/ustawy/${slug}/${a.id}`;
+                              const url = `${window.location.origin}${import.meta.env.BASE_URL}ustawy/${slug}/${a.id}`;
                               void navigator.clipboard?.writeText(`Art. ${a.num} ${def.abbr} – ${url}`).then(() => toast('Skopiowano odnośnik'));
                             }}
                           >

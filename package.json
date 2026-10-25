@@ -2,12 +2,14 @@
   "name": "aplikacjasedziowska",
   "private": true,
   "version": "1.0.0",
-  "description": "Aplikacja do nauki na egzamin wstępny na aplikację sędziowską (KSSiP): oficjalne testy, kazusy, ustawy z API Sejmu, kalkulator wynagrodzeń.",
+  "description": "Sędzia – nauka do konkursu na aplikację sędziowską KSSiP: oficjalne testy z kluczami, pytania z aktualnych ustaw (API Sejmu), kazusy z kryteriami, czytnik ustaw i kalkulator wynagrodzeń.",
   "type": "module",
-  "engines": { "node": ">=20" },
+  "engines": {
+    "node": ">=20"
+  },
   "scripts": {
     "dev": "vite",
-    "build": "tsc -b && vite build",
+    "build": "tsc -b && vite build && tsx scripts/prerender.ts",
     "preview": "vite preview",
     "typecheck": "tsc -b",
     "test": "vitest run",
@@ -31,5 +33,6 @@
     "typescript": "5.9.3",
     "vite": "7.3.7",
     "vitest": "3.2.7"
-  }
+  },
+  "homepage": "https://sedzia.wisnia.dev"
 }

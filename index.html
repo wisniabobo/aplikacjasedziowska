@@ -3,20 +3,84 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
-    <meta name="description" content="Nauka na egzamin wstępny na aplikację sędziowską KSSiP: oficjalne testy z kluczami, ponad 13 tys. pytań z aktualnych ustaw (API Sejmu), kazusy z kryteriami oceny, czytnik ustaw z wykazu i kalkulator wynagrodzeń sędziego, asesora i aplikanta." />
+    <title>Sędzia – nauka do konkursu na aplikację sędziowską KSSiP</title>
+    <meta name="description" content="Przygotowanie do egzaminu wstępnego na aplikację sędziowską: oficjalne testy KSSiP z kluczami, ponad 16 000 pytań z aktualnych przepisów, kazusy z kryteriami oceny, 28 ustaw z wykazu na 2026 r. i kalkulator wynagrodzeń aplikanta, asesora i sędziego." />
+    <link rel="canonical" href="https://sedzia.wisnia.dev/" />
+    <meta name="robots" content="index, follow, max-image-preview:large" />
     <meta name="theme-color" content="#f2f2f7" media="(prefers-color-scheme: light)" />
     <meta name="theme-color" content="#000000" media="(prefers-color-scheme: dark)" />
+    <meta name="application-name" content="Sędzia" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <meta name="apple-mobile-web-app-title" content="Aplikacja" />
-    <link rel="manifest" href="./manifest.webmanifest" />
-    <link rel="icon" href="./icon.svg" type="image/svg+xml" />
-    <link rel="apple-touch-icon" href="./icon-180.png" />
-    <title>Aplikacja sędziowska – nauka do egzaminu KSSiP</title>
+    <meta name="apple-mobile-web-app-title" content="Sędzia" />
+    <meta name="format-detection" content="telephone=no" />
+
+    <meta property="og:type" content="website" />
+    <meta property="og:locale" content="pl_PL" />
+    <meta property="og:site_name" content="Sędzia" />
+    <meta property="og:title" content="Sędzia – nauka do konkursu na aplikację sędziowską KSSiP" />
+    <meta property="og:description" content="Oficjalne testy KSSiP z kluczami, 16 000+ pytań z aktualnych przepisów, kazusy z kryteriami oceny i czytnik 28 ustaw z wykazu. Ucz się systematycznie i sprawdzaj postępy." />
+    <meta property="og:url" content="https://sedzia.wisnia.dev/" />
+    <meta property="og:image" content="https://sedzia.wisnia.dev/og-image.png" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Sędzia – konkurs na aplikację sędziowską KSSiP" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Sędzia – nauka do konkursu na aplikację sędziowską KSSiP" />
+    <meta name="twitter:description" content="Oficjalne testy KSSiP z kluczami, 16 000+ pytań z aktualnych przepisów, kazusy i ustawy z wykazu." />
+    <meta name="twitter:image" content="https://sedzia.wisnia.dev/og-image.png" />
+
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" href="/icon.svg" type="image/svg+xml" />
+    <link rel="icon" href="/icon-192.png" type="image/png" sizes="192x192" />
+    <link rel="apple-touch-icon" href="/icon-180.png" />
+    <link rel="preconnect" href="https://api.sejm.gov.pl" crossorigin />
+
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@graph": [
+          {
+            "@type": "WebSite",
+            "@id": "https://sedzia.wisnia.dev/#website",
+            "url": "https://sedzia.wisnia.dev/",
+            "name": "Sędzia",
+            "alternateName": "Sędzia – aplikacja sędziowska",
+            "inLanguage": "pl-PL",
+            "description": "Nauka do konkursu na aplikację sędziowską w Krajowej Szkole Sądownictwa i Prokuratury."
+          },
+          {
+            "@type": "WebApplication",
+            "@id": "https://sedzia.wisnia.dev/#app",
+            "name": "Sędzia",
+            "url": "https://sedzia.wisnia.dev/",
+            "applicationCategory": "EducationalApplication",
+            "operatingSystem": "Web, iOS, Android, macOS, Windows",
+            "inLanguage": "pl-PL",
+            "browserRequirements": "Nowoczesna przeglądarka z obsługą JavaScript",
+            "featureList": [
+              "Oficjalne testy I etapu konkursu KSSiP z lat 2010–2026 z kluczami odpowiedzi",
+              "Ponad 13 000 pytań generowanych z aktualnych tekstów ustaw",
+              "Symulacja egzaminu: 150 pytań w 150 minut",
+              "System powtórek Leitnera",
+              "Kazusy II etapu z kryteriami oceny KSSiP",
+              "Czytnik 28 aktów prawnych z wykazu na 2026 r. aktualizowany z API Sejmu",
+              "Kalkulator wynagrodzeń aplikanta KSSiP, asesora sądowego i sędziego"
+            ],
+            "isPartOf": { "@id": "https://sedzia.wisnia.dev/#website" }
+          }
+        ]
+      }
+    </script>
   </head>
   <body>
     <div id="root"></div>
-    <noscript>Ta aplikacja wymaga włączonej obsługi JavaScript.</noscript>
+    <noscript>
+      <p style="font-family: system-ui, sans-serif; padding: 24px">
+        Sędzia to aplikacja do nauki do konkursu na aplikację sędziowską KSSiP. Do działania wymaga włączonej obsługi JavaScript w przeglądarce.
+      </p>
+    </noscript>
     <script type="module" src="/src/main.tsx"></script>
   </body>
 </html>

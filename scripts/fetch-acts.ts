@@ -114,8 +114,17 @@ async function main() {
             ? await buildEu(def)
             : await buildPdf(def);
       if (doc.articles.length < 5) throw new Error(`podejrzanie mało artykułów: ${doc.articles.length}`);
-      const json = JSON.stringify(doc);
-      await fs.writeFile(path.join(OUT, `${def.slug}.json`), json);
+      const target = path.join(OUT, `${def.slug}.json`);
+      const strip = (d: ActDoc) => JSON.stringify({ ...d, meta: { ...d.meta, fetchedAt: '' } });
+      let previous: ActDoc | null = null;
+      try {
+        previous = JSON.parse(await fs.readFile(target, 'utf8')) as ActDoc;
+      } catch {
+        previous = null;
+      }
+      // Bez zmian w treści – zostawiamy plik (nie zmieniamy daty pobrania, żeby nie tworzyć pustych commitów).
+      const json = previous && strip(previous) === strip(doc) ? JSON.stringify(previous) : JSON.stringify(doc);
+      if (!previous || strip(previous) !== strip(doc)) await fs.writeFile(target, json);
       const entry: ActIndexEntry = {
         slug: def.slug,
         eli: doc.meta.eli,

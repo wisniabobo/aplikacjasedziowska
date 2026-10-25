@@ -4,7 +4,7 @@ import { Icon, type IconName } from './Icon';
 
 export function PageHeader({ title, subtitle, back, actions }: { title: string; subtitle?: ReactNode; back?: { to: string; label: string }; actions?: ReactNode }) {
   useEffect(() => {
-    document.title = `${title} · Aplikacja sędziowska`;
+    document.title = title === 'Start' ? 'Sędzia – nauka do konkursu na aplikację sędziowską KSSiP' : `${title} · Sędzia – aplikacja sędziowska`;
   }, [title]);
   return (
     <>

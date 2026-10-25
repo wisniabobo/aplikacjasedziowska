@@ -1271,3 +1271,80 @@ table.data tfoot td {
     display: none;
   }
 }
+
+/* treść prerenderowana dla wyszukiwarek – widoczna tylko do startu aplikacji */
+.seo-static nav {
+  font-size: 15px;
+  margin-bottom: 16px;
+}
+.seo-static h1 {
+  font-size: 30px;
+  line-height: 1.2;
+}
+
+/* sekcja powitalna */
+.hero {
+  padding: 24px 20px;
+  background: linear-gradient(160deg, var(--tint) 0%, color-mix(in srgb, var(--tint) 70%, #1b0b4d) 100%);
+  color: #fff;
+  border-radius: 20px;
+}
+.hero h2 {
+  font-size: 30px;
+  line-height: 36px;
+  font-weight: 800;
+  letter-spacing: -0.01em;
+  margin: 0 0 10px;
+}
+.hero p {
+  margin: 0 0 16px;
+  font-size: 17px;
+  line-height: 24px;
+  color: rgba(255, 255, 255, 0.9);
+}
+.hero ul {
+  list-style: none;
+  padding: 0;
+  margin: 0 0 20px;
+  display: grid;
+  gap: 8px;
+}
+.hero li {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  font-size: 16px;
+  line-height: 22px;
+}
+.hero li svg {
+  flex: none;
+  margin-top: 1px;
+}
+.hero .btn.primary {
+  background: #fff;
+  color: #3d2399;
+}
+.hero .btn.primary:hover {
+  background: #f1edff;
+}
+.hero .btn.ghost {
+  background: rgba(255, 255, 255, 0.16);
+  color: #fff;
+}
+.hero .btn.ghost:hover {
+  background: rgba(255, 255, 255, 0.26);
+}
+@media (prefers-color-scheme: dark) {
+  .hero {
+    background: linear-gradient(160deg, #3b2690 0%, #1d1150 100%);
+  }
+}
+@media (min-width: 700px) {
+  .hero {
+    padding: 32px 30px;
+  }
+  .hero h2 {
+    font-size: 36px;
+    line-height: 42px;
+  }
+}

@@ -1,5 +1,5 @@
 import { lazy, Suspense, useEffect } from 'react';
-import { HashRouter, NavLink, Route, Routes, useLocation } from 'react-router-dom';
+import { BrowserRouter, NavLink, Route, Routes, useLocation } from 'react-router-dom';
 import { Icon, type IconName } from './components/Icon';
 import { Loading, ToastProvider } from './components/ui';
 import { Home } from './pages/Home';
@@ -41,8 +41,8 @@ function Sidebar() {
           <Icon name="scale" size={20} />
         </span>
         <span>
-          <span className="brand-name" style={{ display: 'block' }}>Aplikacja sędziowska</span>
-          <span className="t-cap muted">Nauka do konkursu KSSiP</span>
+          <span className="brand-name" style={{ display: 'block' }}>Sędzia</span>
+          <span className="t-cap muted">Aplikacja sędziowska · KSSiP</span>
         </span>
       </div>
       <div className="side-nav">
@@ -88,7 +88,7 @@ function TabBar() {
 
 export function App() {
   return (
-    <HashRouter>
+    <BrowserRouter basename={import.meta.env.BASE_URL.replace(/\/$/, '') || undefined}>
       <ToastProvider>
         <ScrollToTop />
         <div className="app">
@@ -122,6 +122,6 @@ export function App() {
           <TabBar />
         </div>
       </ToastProvider>
-    </HashRouter>
+    </BrowserRouter>
   );
 }
