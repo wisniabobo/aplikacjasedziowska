@@ -6,7 +6,7 @@
   "label": "Konkurs na aplikację uzupełniającą sędziowską 2026",
   "count": 149,
   "withKey": 130,
-  "verified": 80
+  "verified": 113
  },
  {
   "id": "asap-2025",
@@ -15,7 +15,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2025",
   "count": 150,
   "withKey": 148,
-  "verified": 115
+  "verified": 128
  },
  {
   "id": "aus-2025",
@@ -24,7 +24,7 @@
   "label": "Konkurs na aplikację uzupełniającą sędziowską 2025",
   "count": 150,
   "withKey": 147,
-  "verified": 134
+  "verified": 147
  },
  {
   "id": "asap-2024",
@@ -33,7 +33,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2024",
   "count": 150,
   "withKey": 140,
-  "verified": 90
+  "verified": 104
  },
  {
   "id": "aus-2024",
@@ -42,7 +42,7 @@
   "label": "Konkurs na aplikację uzupełniającą sędziowską 2024",
   "count": 150,
   "withKey": 149,
-  "verified": 126
+  "verified": 149
  },
  {
   "id": "asap-2023",
@@ -51,7 +51,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2023",
   "count": 148,
   "withKey": 146,
-  "verified": 109
+  "verified": 139
  },
  {
   "id": "aus-2023",
@@ -60,7 +60,7 @@
   "label": "Konkurs na aplikację uzupełniającą sędziowską 2023",
   "count": 150,
   "withKey": 150,
-  "verified": 126
+  "verified": 147
  },
  {
   "id": "asap-2022",
@@ -69,7 +69,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2022",
   "count": 150,
   "withKey": 150,
-  "verified": 99
+  "verified": 150
  },
  {
   "id": "aus-2022",
@@ -78,7 +78,7 @@
   "label": "Konkurs na aplikację uzupełniającą sędziowską 2022",
   "count": 150,
   "withKey": 150,
-  "verified": 121
+  "verified": 150
  },
  {
   "id": "asap-2021",
@@ -87,16 +87,16 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2021",
   "count": 118,
   "withKey": 118,
-  "verified": 24
+  "verified": 110
  },
  {
   "id": "aus-2021",
   "year": 2021,
   "kind": "uzupelniajaca",
   "label": "Konkurs na aplikację uzupełniającą sędziowską 2021",
-  "count": 114,
-  "withKey": 114,
-  "verified": 35
+  "count": 115,
+  "withKey": 115,
+  "verified": 113
  },
  {
   "id": "asap-2020",
@@ -105,7 +105,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2020",
   "count": 147,
   "withKey": 146,
-  "verified": 136
+  "verified": 142
  },
  {
   "id": "aus-2020",
@@ -114,7 +114,7 @@
   "label": "Konkurs na aplikację uzupełniającą sędziowską 2020",
   "count": 150,
   "withKey": 142,
-  "verified": 121
+  "verified": 141
  },
  {
   "id": "asap-2019",
@@ -123,7 +123,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2019",
   "count": 150,
   "withKey": 150,
-  "verified": 83
+  "verified": 150
  },
  {
   "id": "asap-2018",
@@ -132,7 +132,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2018",
   "count": 150,
   "withKey": 146,
-  "verified": 115
+  "verified": 146
  },
  {
   "id": "asap-2017",
@@ -141,7 +141,7 @@
   "label": "Konkurs na aplikację sędziowską i prokuratorską 2017",
   "count": 150,
   "withKey": 144,
-  "verified": 113
+  "verified": 144
  },
  {
   "id": "ao-2016",
@@ -150,7 +150,7 @@
   "label": "Konkurs na aplikację ogólną 2016",
   "count": 150,
   "withKey": 139,
-  "verified": 107
+  "verified": 125
  },
  {
   "id": "ao-2015",
@@ -159,7 +159,7 @@
   "label": "Konkurs na aplikację ogólną 2015",
   "count": 150,
   "withKey": 133,
-  "verified": 105
+  "verified": 117
  },
  {
   "id": "ao-2014",
@@ -168,7 +168,7 @@
   "label": "Konkurs na aplikację ogólną 2014",
   "count": 136,
   "withKey": 110,
-  "verified": 43
+  "verified": 106
  },
  {
   "id": "ao-2013",
@@ -177,7 +177,7 @@
   "label": "Konkurs na aplikację ogólną 2013",
   "count": 150,
   "withKey": 149,
-  "verified": 141
+  "verified": 149
  },
  {
   "id": "ao-2010",
@@ -186,6 +186,6 @@
   "label": "Konkurs na aplikację ogólną 2010",
   "count": 150,
   "withKey": 150,
-  "verified": 136
+  "verified": 150
  }
 ]

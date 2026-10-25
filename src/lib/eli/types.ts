@@ -59,6 +59,8 @@ export interface ActMeta {
   latestTj?: string;
   /** Akty zmieniające opublikowane po tekście jednolitym. */
   pendingChanges?: { eli: string; title: string; entryIntoForce?: string }[];
+  /** Wersja pobrana z Sejmu w przeglądarce i zapisana na urządzeniu. */
+  local?: boolean;
 }
 
 export interface ActDoc {

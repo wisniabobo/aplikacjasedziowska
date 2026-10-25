@@ -96,6 +96,8 @@ def fix_word(w):
 
 def fix_text(s):
     s = unicodedata.normalize('NFC', s)
+    s = re.sub(r'^Zgodnie\s+[^\sA-Za-ząćęłńóśźż]{1,2}\s*(?=ustaw|Kodeks|Konstytuc|Traktat|Konwencj|z\s)', 'Zgodnie z ', s)
+    s = re.sub(r'^Zgodnie\s+z\.\s+', 'Zgodnie z ', s)
     s = s.replace('„ ', '„').replace(' ”', '”').replace('“', '”')
     s = re.sub(r'\s+([,.;:)])', r'\1', s)
     s = re.sub(r'([(„])\s+', r'\1', s)
@@ -104,6 +106,17 @@ def fix_text(s):
 
 # ---------------------------------------------------------------- linie z OCR
 WATERMARK_RE = re.compile(r'(N?[ALI]?ABÓR\s*KSS|KSSi[PDA]\b.*KSS|ABÓR KSS|OMINCIVA|RIDL\b)')
+
+
+CONFUSABLES = str.maketrans({
+    'А': 'A', 'В': 'B', 'С': 'C', 'Е': 'E', 'Н': 'H', 'К': 'K', 'М': 'M', 'О': 'O', 'Р': 'P', 'Т': 'T', 'Х': 'X',
+    'а': 'a', 'е': 'e', 'о': 'o', 'р': 'p', 'с': 'c', 'у': 'y', 'х': 'x', 'к': 'k', 'і': 'i',
+    'ä': 'a', 'ö': 'ó', 'ü': 'u', 'é': 'ć', 'è': 'e', 'ë': 'e', 'ï': 'i', 'î': 'i', 'â': 'a', 'ô': 'ó', 'ÿ': 'y',
+})
+
+
+def normalize_ocr(t):
+    return t.translate(CONFUSABLES)
 
 
 def page_lines(page):
@@ -128,7 +141,7 @@ def page_lines(page):
             'h': ln['h'],
             'conf': min(p['c'] for p in parts),
             'parts': parts,
-            't': ' '.join(p['t'].strip() for p in parts),
+            't': normalize_ocr(' '.join(p['t'].strip() for p in parts)),
         })
     return out
 
@@ -245,6 +258,34 @@ def parse_test(ocr):
     return questions
 
 
+INLINE_RE = re.compile(r'\s([ABC])[\.\)]\s')
+
+
+def split_inline(q):
+    """Odpowiedzi zlane w jedną linię („… A. x, B. y, C. z”) rozdzielamy na trzy pola."""
+    if not q['a'][0]:
+        m = re.search(r'\sA[\.\)]\s(.+?)\sB[\.\)]\s(.+?)\sC[\.\)]\s(.+)$', q['q'])
+        if m:
+            q['q'] = q['q'][:m.start()].strip()
+            q['a'] = [m.group(1).strip(), m.group(2).strip(), m.group(3).strip()]
+            return q
+    for i, nxt in ((0, 'B'), (1, 'C')):
+        if q['a'][i] and not q['a'][i + 1]:
+            m = re.search(rf'\s{nxt}[\.\)]\s', ' ' + q['a'][i])
+            if m:
+                full = ' ' + q['a'][i]
+                head, tail = full[:m.start()].strip(), full[m.end():].strip()
+                q['a'][i] = head
+                if i == 0 and not q['a'][2]:
+                    m2 = re.search(r'\sC[\.\)]\s', ' ' + tail)
+                    if m2:
+                        t2 = ' ' + tail
+                        q['a'][1], q['a'][2] = t2[:m2.start()].strip(), t2[m2.end():].strip()
+                        continue
+                q['a'][i + 1] = tail
+    return q
+
+
 def join(a, b):
     if not a:
         return b
@@ -282,7 +323,7 @@ def parse_key_text(ocr):
                 rows[n][0] = t
             elif rows[n][0] is not None or t.startswith('art'):
                 rows[n][1] = (rows[n][1] + ' ' + t).strip()
-    return {k: (v[0], v[1]) for k, v in rows.items()}
+    return {k: (v[0], v[1], v[0] is not None) for k, v in rows.items()}
 
 
 def reocr_letters(exam_id, cells):
@@ -365,6 +406,7 @@ def parse_key(ocr, exam_id=''):
     # numeracja: uzupełniamy brakujące numery na podstawie kolejności
     prev = 0
     for r in merged:
+        r.append(r[2] is not None and prev < r[2] <= prev + 3)  # r[5] – numer odczytany przez OCR
         if r[2] is None or r[2] != prev + 1:
             if r[2] is None or not (prev < r[2] <= prev + 3):
                 r[2] = prev + 1
@@ -377,13 +419,13 @@ def parse_key(ocr, exam_id=''):
         hi = nxt[1] if nxt and nxt[0] == pk else 2.0
         lo = cy - 0.012
         b = [t for (bpk, y, by, t) in sorted(basis) if bpk == pk and lo <= by < hi - 0.004]
-        out[r[2]] = (r[3], ' '.join(b))
+        out[r[2]] = (r[3], ' '.join(b), bool(r[5]) and r[3] is not None)
         if r[3] is None:
             cells.append((r[2], pk, let_x - 0.03, cy - 0.013, let_x + 0.06, cy + 0.013))
     if cells:
         fixed = reocr_letters(exam_id, cells)
         for n, letter in fixed.items():
-            out[n] = (letter, out[n][1])
+            out[n] = (letter, out[n][1], False)
     return out
 
 
@@ -508,7 +550,7 @@ def main():
         kp = os.path.join(OCR_DIR, f"{e['id']}__key.json")
         if not (os.path.exists(tp) and os.path.exists(kp)):
             continue
-        qs = [q for q in parse_test(json.load(open(tp))) if q['n'] <= 150]
+        qs = [split_inline(q) for q in parse_test(json.load(open(tp))) if q['n'] <= 150]
         key = parse_key(json.load(open(kp)), e['id'])
         corr = CORRECTIONS.get(e['id'], {})
         out_q = []
@@ -516,22 +558,20 @@ def main():
         grid = load_grid(e['id'])
         for q in qs:
             n = q['n']
-            a_letter, a_basis = key.get(n, (None, ''))
+            a_letter, a_basis, a_anchored = key.get(n, (None, '', False))
             g = grid.get(n)
+            g_ok = bool(g and g.get('letter') and not g.get('uncertain') and not g.get('conflict'))
             g_letter = g.get('letter') if g and not g.get('uncertain') else None
             status = None
             letter = None
-            if a_letter and g_letter:
-                if a_letter == g_letter:
-                    letter, status = a_letter, 'zgodne'
-                elif not g.get('inferred') and not g.get('conflict'):
-                    letter, status = g_letter, 'siatka'
-                else:
-                    letter, status = g_letter, 'niepewne'
-            elif g_letter:
-                letter, status = g_letter, 'siatka' if not g.get('inferred') else 'siatka-wn'
+            if a_letter and g_letter and a_letter == g_letter:
+                letter, status = a_letter, 'zgodne'
+            elif g_ok:
+                letter, status = g_letter, 'siatka'
             elif a_letter:
-                letter, status = a_letter, 'ocr'
+                letter, status = a_letter, 'ocr-kotwica' if a_anchored else 'ocr'
+            elif g_letter:
+                letter, status = g_letter, 'siatka-konflikt'
             basis = (g.get('basis') if g and g.get('basis', '').strip().lower().startswith(('art', 'argument')) else '') or a_basis
             c = corr.get(str(n), {})
             if 'correct' in c:
@@ -543,16 +583,22 @@ def main():
             qtext = c.get('q', fix_text(q['q']))
             qa = question_act(qtext)
             ba = refs[0]['act'] if refs else None
-            verified = letter is not None and status in ('zgodne', 'ręcznie') or (
-                letter is not None and status in ('siatka', 'ocr', 'siatka-wn') and qa is not None and ba is not None and qa == ba)
-            if letter is not None and qa and ba and qa != ba and status != 'ręcznie' and not any(r['act'] == qa for r in refs):
+            act_mismatch = bool(qa and ba and qa != ba and not any(r['act'] == qa for r in refs))
+            if letter is None:
                 verified = False
+            elif status in ('zgodne', 'siatka', 'ręcznie'):
+                verified = True
+            elif status == 'ocr-kotwica':
+                verified = not act_mismatch
+            else:
+                verified = bool(qa and ba and qa == ba)
             item = {
                 'n': n,
                 'q': qtext,
                 'a': c.get('a', [fix_text(x) for x in q['a']]),
                 'correct': letter,
                 'keyVerified': bool(verified),
+                'keySource': status,
                 'basis': basis,
                 'refs': refs,
             }

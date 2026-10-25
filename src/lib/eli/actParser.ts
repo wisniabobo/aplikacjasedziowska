@@ -105,7 +105,12 @@ function isCentered(l: PdfLine, c: Ctx): boolean {
 export function parseActLines(lines: PdfLine[], opts: ParseOptions = {}): ParsedAct {
   const dehyphenate = opts.dehyphenate ?? false;
   const body = lines.filter((l) => l.zone === 'body');
-  const left = numericMode(body.filter((l) => l.text.length > 30).map((l) => l.x));
+  // Lewy margines: najmniejsze x, od którego zaczyna się co najmniej 10% dłuższych linii.
+  const longXs = body.filter((l) => l.text.length > 30).map((l) => Math.round(l.x * 2) / 2);
+  const xCounts = new Map<number, number>();
+  for (const x of longXs) xCounts.set(x, (xCounts.get(x) ?? 0) + 1);
+  const frequent = [...xCounts.entries()].filter(([, c]) => c >= Math.max(1, longXs.length * 0.1)).map(([x]) => x);
+  const left = frequent.length ? Math.min(...frequent) : numericMode(longXs);
   const artLines = body.filter((l) => ART_RE.test(l.text));
   const indent = artLines.length ? numericMode(artLines.map((l) => l.x)) : left + 25;
   const right = numericMode(body.filter((l) => l.text.length > 50).map((l) => l.x2)) || left + 410;
